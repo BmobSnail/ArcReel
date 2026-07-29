@@ -947,6 +947,7 @@ export default {
   'endpoint_newapi_video_display': 'NewAPI Unified Video',
   'endpoint_v2_video_generations_display': 'V2 Video Generations',
   'endpoint_ark_seedance_display': 'Volcengine Ark (Seedance)',
+  'endpoint_ark_seedance_http_display': 'Volcengine Ark / Proxy (Seedance HTTP)',
   'endpoint_vidu_video_display': 'Vidu Video',
   'endpoint_dashscope_image_display': 'Alibaba Model Studio (Image)',
   'endpoint_dashscope_async_video_display': 'Alibaba Model Studio (Async Video)',

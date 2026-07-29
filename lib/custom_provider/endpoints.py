@@ -31,6 +31,7 @@ from lib.image_backends.openai import OpenAIImageBackend
 from lib.text_backends.gemini import GeminiTextBackend
 from lib.text_backends.openai import OpenAITextBackend
 from lib.video_backends.ark import ArkVideoBackend
+from lib.video_backends.ark_http import ArkHttpVideoBackend
 from lib.video_backends.base import VideoCapabilities
 from lib.video_backends.dashscope import DashScopeVideoBackend
 from lib.video_backends.kling import KlingVideoBackend
@@ -187,6 +188,15 @@ def _build_ark_seedance(provider, model_id: str) -> CustomVideoBackend:
     return CustomVideoBackend(provider_id=provider.provider_id, delegate=delegate, model=model_id)
 
 
+def _build_ark_seedance_http(provider, model_id: str) -> CustomVideoBackend:
+    """纯 httpx 版 seedance — 不依赖 Ark SDK，避免 SDK 序列化 null 字段导致代理崩溃。"""
+    base_url = (provider.base_url or "").strip().rstrip("/")
+    if not base_url:
+        raise ValueError("ark-seedance-http 端点需要 base_url")
+    delegate = ArkHttpVideoBackend(api_key=provider.api_key, base_url=base_url, model=model_id)
+    return CustomVideoBackend(provider_id=provider.provider_id, delegate=delegate, model=model_id)
+
+
 def _build_vidu_video(provider, model_id: str) -> CustomVideoBackend:
     base_url = _ensure_url_path_suffix(provider.base_url, "/ent/v2")
     delegate = ViduVideoBackend(api_key=provider.api_key, base_url=base_url, model=model_id)
@@ -339,6 +349,16 @@ ENDPOINT_REGISTRY: dict[str, EndpointSpec] = {
         end_image_capable=True,
         # _create_task 为 reference_audio_files 逐段组装 audio_url + role: reference_audio
         reference_audio_capable=True,
+    ),
+    "ark-seedance-http": EndpointSpec(
+        key="ark-seedance-http",
+        media_type="video",
+        family="ark",
+        display_name_key="endpoint_ark_seedance_http_display",
+        request_method="POST",
+        request_path_template="/contents/generations/tasks",
+        build_backend=_build_ark_seedance_http,
+        video_caps_for_model=ArkHttpVideoBackend.video_capabilities_for_model,
     ),
     "vidu-video": EndpointSpec(
         key="vidu-video",

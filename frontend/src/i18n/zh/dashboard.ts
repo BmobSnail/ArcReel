@@ -946,6 +946,7 @@ export default {
   'endpoint_newapi_video_display': 'NewAPI 视频',
   'endpoint_v2_video_generations_display': 'V2 统一视频',
   'endpoint_ark_seedance_display': '火山方舟 (Seedance)',
+  'endpoint_ark_seedance_http_display': '火山方舟/代理 (Seedance HTTP)',
   'endpoint_vidu_video_display': 'Vidu 视频',
   'endpoint_dashscope_image_display': '阿里百炼（图片）',
   'endpoint_dashscope_async_video_display': '阿里百炼（异步视频）',
