@@ -23,7 +23,6 @@ from lib.retry import (
 from lib.video_backends.base import (
     ProviderJobIdPersistenceMixin,
     VideoCapabilities,
-    VideoCapability,
     VideoGenerationRequest,
     VideoGenerationResult,
     download_video,
@@ -113,20 +112,13 @@ class ArkHttpVideoBackend(ProviderJobIdPersistenceMixin):
     def model(self) -> str:
         return self._model
 
-    @property
-    def capabilities(self) -> set[VideoCapability]:
-        return {
-            VideoCapability.TEXT_TO_VIDEO,
-            VideoCapability.IMAGE_TO_VIDEO,
-        }
-
     @staticmethod
     def video_capabilities_for_model(model: str) -> VideoCapabilities:
         """同 ArkVideoBackend 的能力声明——兼容 resolver 的纯函数接口。"""
         model_lower = model.lower()
         is_sd2 = "seedance-2-0" in model_lower or "seedance-2.0" in model_lower
         if is_sd2:
-            return VideoCapabilities(last_frame=True, reference_images=True, max_reference_images=9)
+            return VideoCapabilities(last_frame=True, max_reference_images=9)
         return VideoCapabilities()
 
     @property

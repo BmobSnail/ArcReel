@@ -217,6 +217,7 @@ class TestEndpointCatalog:
             "newapi-video",
             "v2-video-generations",
             "ark-seedance",
+            "ark-seedance-http",
             "vidu-video",
             "dashscope-image",
             "dashscope-async-video",

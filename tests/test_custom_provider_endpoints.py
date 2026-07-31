@@ -27,6 +27,7 @@ class TestRegistry:
             "newapi-video",
             "v2-video-generations",
             "ark-seedance",
+            "ark-seedance-http",
             "vidu-video",
             "dashscope-image",
             "dashscope-async-video",
@@ -70,6 +71,7 @@ class TestRegistry:
         for key in (
             "v2-video-generations",
             "ark-seedance",
+            "ark-seedance-http",
             "vidu-video",
             "dashscope-async-video",
             "minimax-video",
@@ -90,6 +92,7 @@ class TestRegistry:
         for key in (
             "v2-video-generations",
             "ark-seedance",
+            "ark-seedance-http",
             "vidu-video",
             "dashscope-async-video",
             "minimax-video",
@@ -224,6 +227,7 @@ class TestRegistry:
             "newapi-video",
             "v2-video-generations",
             "ark-seedance",
+            "ark-seedance-http",
             "vidu-video",
             "dashscope-async-video",
             "minimax-video",
